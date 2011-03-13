@@ -1,5 +1,9 @@
 # CHANGELOG
 
+# 0.55
+
+ - Refactor for Persistence 0.75
+
 # 0.54
 
  - Support for Spells 0.992, portal and window spells.

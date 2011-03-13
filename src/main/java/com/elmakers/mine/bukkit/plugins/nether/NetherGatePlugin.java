@@ -82,7 +82,7 @@ public class NetherGatePlugin extends JavaPlugin
 	    {
 	    	PersistencePlugin plugin = (PersistencePlugin)checkForPersistence;
 	    	persistence = plugin.getPersistence();
-		    utilities = plugin.getUtilities(this);
+		    utilities = plugin.createUtilities(this);
 	    } 
 	    else 
 	    {

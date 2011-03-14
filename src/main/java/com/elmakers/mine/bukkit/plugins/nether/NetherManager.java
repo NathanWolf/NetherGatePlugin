@@ -18,7 +18,6 @@ import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
 
-import com.elmakers.mine.bukkit.gameplay.BlockRequestListener;
 import com.elmakers.mine.bukkit.persistence.Persistence;
 import com.elmakers.mine.bukkit.persistence.dao.BoundingBox;
 import com.elmakers.mine.bukkit.persistence.dao.LocationData;
@@ -30,6 +29,7 @@ import com.elmakers.mine.bukkit.plugins.nether.dao.NetherWorld;
 import com.elmakers.mine.bukkit.plugins.nether.dao.Portal;
 import com.elmakers.mine.bukkit.plugins.nether.dao.PortalArea;
 import com.elmakers.mine.bukkit.plugins.nether.dao.PortalType;
+import com.elmakers.mine.bukkit.utilities.BlockRequestListener;
 import com.elmakers.mine.bukkit.utilities.PluginUtilities;
 
 public class NetherManager

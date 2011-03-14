@@ -10,7 +10,6 @@ import org.bukkit.block.BlockFace;
 import org.bukkit.entity.Player;
 import org.bukkit.util.BlockVector;
 
-import com.elmakers.mine.bukkit.gameplay.CSVParser;
 import com.elmakers.mine.bukkit.persisted.PersistClass;
 import com.elmakers.mine.bukkit.persisted.PersistField;
 import com.elmakers.mine.bukkit.persisted.Persisted;
@@ -20,6 +19,7 @@ import com.elmakers.mine.bukkit.persistence.dao.LocationData;
 import com.elmakers.mine.bukkit.persistence.dao.MaterialList;
 import com.elmakers.mine.bukkit.persistence.dao.Orientation;
 import com.elmakers.mine.bukkit.plugins.nether.NetherManager;
+import com.elmakers.mine.bukkit.utilities.CSVParser;
 
 @PersistClass(schema="nether", name="portal")
 public class Portal extends Persisted

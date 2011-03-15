@@ -3,6 +3,9 @@
 # 0.55
 
  - Refactor for Persistence 0.75
+ - Some changes to make NG play nicer with other multi-world plugins, mainly Essentials
+ - Add "world load" command
+ - Remove auto-daisy-chaining of worlds
 
 # 0.54
 

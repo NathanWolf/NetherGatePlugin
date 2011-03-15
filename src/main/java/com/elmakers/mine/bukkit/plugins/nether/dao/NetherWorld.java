@@ -29,20 +29,10 @@ public class NetherWorld extends Persisted
 		centerOffset = NetherManager.origin;	
 	}
 	
-	public void autoBind(NetherWorld currentWorld)
+	public void bind(NetherWorld currentWorld)
 	{
-		if (targetWorld != null) return;
-		
-		if (currentWorld.targetWorld == null)
-		{
-			currentWorld.targetWorld = this;
-			targetWorld = currentWorld;
-		}
-		else
-		{
-			targetWorld = currentWorld.targetWorld;
-			currentWorld.targetWorld = this;
-		}
+		currentWorld.targetWorld = this;
+		targetWorld = currentWorld;
 		
 		// Save changes to current world target
 		getPersistence().put(currentWorld);

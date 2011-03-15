@@ -99,9 +99,10 @@ public class NetherGatePlugin extends JavaPlugin
 		
 		worldCommand = netherCommand.getSubCommand("world", "Manage worlds", null);
 
-		worldCreateCommand = worldCommand.getSubCommand("create", "Create a portal area or world", "<nether|normal> <worldname>");
+		worldCreateCommand = worldCommand.getSubCommand("create", "Create a new world", "<nether|normal> <worldname>");
+		worldLoadCommand = worldCommand.getSubCommand("load", "Load an existing world", "<worldname>");
 		worldGoCommand = worldCommand.getSubCommand("go", "TP to a world", "[world]");
-		worldDeleteCommand = worldCommand.getSubCommand("delete", "Delete an world", "<name>");
+		worldDeleteCommand = worldCommand.getSubCommand("delete", "Remove a world from NetherGate", "<name>");
 		worldTargetCommand = worldCommand.getSubCommand("target", "Re-target a world", "<from> <to>");
 		worldScaleCommand = worldCommand.getSubCommand("scale", "Re-scale a world", "<name> <scale>"); 
 		worldCenterCommand = worldCommand.getSubCommand("center", "Re-center a world", "<name> <X> <Y> <Z>"); 
@@ -122,6 +123,7 @@ public class NetherGatePlugin extends JavaPlugin
 		
 		areaCommand.bind("onCreateArea");
 		worldCreateCommand.bind("onCreateWorld");
+		worldLoadCommand.bind("onLoadWorld");
 		worldGoCommand.bind("onGo");
 		kitCommand.bind("onKit");
 		worldDeleteCommand.bind("onDeleteWorld");
@@ -141,7 +143,10 @@ public class NetherGatePlugin extends JavaPlugin
 		netherExistsMessage = utilities.getMessage("netherExist", "A Nether area already exists here");
 		giveKitMessage = utilities.getMessage("giveKit", "Happy portaling!");
 		worldCreateMessage = utilities.getMessage("worldCreated", "World %s created");
+		worldLoadMessage = utilities.getMessage("worldLoaded", "World %s loaded");
+		worldExistsMessage = utilities.getMessage("worldExists", "World %s already exists");
 		worldCreateFailedMessage = utilities.getMessage("worldCreateFailed", "World creation failed");
+		worldLoadFailedMessage = utilities.getMessage("worldLoadFailed", "World %s load failed");
 		goFailedMessage = utilities.getMessage("goFailed", "Failed teleport");
 		goSuccessMessage = utilities.getMessage("goSuccess", "Going to world %s");
 		retargtedWorldMessage = utilities.getMessage("retargedWorld", "Retargeted world %s to %s");
@@ -705,13 +710,6 @@ public class NetherGatePlugin extends JavaPlugin
 	
 	public boolean onCreateWorld(CommandSender sender, String[] parameters)
 	{
-		World currentWorld = null;
-		if (sender instanceof Player)
-		{
-			Player player = (Player)sender;
-			currentWorld = player.getWorld();
-		}
-		
 		if (parameters.length < 2)
 		{
 			return false;
@@ -733,7 +731,13 @@ public class NetherGatePlugin extends JavaPlugin
 			return false;
 		}
 		
-		NetherWorld world = manager.createWorld(worldName, worldType, currentWorld);
+		NetherWorld world = manager.getWorldData(worldName);
+		if (world != null)
+		{
+			worldExistsMessage.sendTo(sender, worldName);
+			return true;
+		}
+		world = manager.createWorld(worldName, worldType);
 		if (world == null)
 		{
 			worldCreateFailedMessage.sendTo(sender);
@@ -741,6 +745,34 @@ public class NetherGatePlugin extends JavaPlugin
 		else
 		{
 			worldCreateMessage.sendTo(sender, world.getWorld().getName());
+		}
+		
+		return true;
+	}
+	
+	public boolean onLoadWorld(CommandSender sender, String[] parameters)
+	{
+		if (parameters.length < 2)
+		{
+			return false;
+		}
+		
+		String worldName = parameters[1];		
+		NetherWorld world = manager.getWorldData(worldName);
+		if (world != null)
+		{
+			worldExistsMessage.sendTo(sender, worldName);
+			return true;
+		}
+		WorldData worldData = utilities.getWorld(getServer(), worldName);
+		if (worldData != null)
+		{
+			world = manager.getWorldData(worldData);
+			worldLoadMessage.sendTo(sender, world.getWorld().getName());	
+		}
+		else
+		{
+			worldLoadFailedMessage.sendTo(sender, worldName);
 		}
 		
 		return true;
@@ -851,6 +883,7 @@ public class NetherGatePlugin extends JavaPlugin
 	
 	protected PluginCommand worldCommand;
 	protected PluginCommand worldCreateCommand;
+	protected PluginCommand worldLoadCommand;
 	protected PluginCommand worldGoCommand;
 	protected PluginCommand worldTargetCommand;
 	protected PluginCommand worldDeleteCommand;
@@ -876,7 +909,10 @@ public class NetherGatePlugin extends JavaPlugin
 	protected Message netherExistsMessage;
 	protected Message giveKitMessage;
 	protected Message worldCreateMessage;
+	protected Message worldLoadMessage;
+	protected Message worldExistsMessage;
 	protected Message worldCreateFailedMessage;
+	protected Message worldLoadFailedMessage;
 	protected Message goFailedMessage;
 	protected Message goSuccessMessage;
 	protected Message retargtedWorldMessage;

@@ -40,21 +40,15 @@ public class NetherManager
 		NetherWorld currentWorld = getWorldData(current);
 		if (currentWorld == null)
 		{
-			currentWorld = createWorld(current.getName(), current.getEnvironment(), null);
+			currentWorld = createWorld(current.getName(), current.getEnvironment());
 		}
 		
 		return currentWorld;
 	}
 	
-	public NetherWorld createWorld(String name, Environment defaultType, World currentWorld)
+	public NetherWorld createWorld(String name, Environment defaultType)
 	{
-		NetherWorld currentWorldData = null;
-		if (currentWorld != null)
-		{
-			currentWorldData = getWorldData(currentWorld);
-		}
-
-		WorldData world = utilities.getWorld(server, name, defaultType);
+		WorldData world = utilities.loadWorld(server, name, defaultType);
 		if (world == null) return null;
 		
 		NetherWorld worldData = getWorldData(world);
@@ -72,11 +66,6 @@ public class NetherManager
 			persistence.put(worldData);
 			persistence.put(worldData.getTargetOffset());
 			persistence.put(worldData.getCenterOffset());
-			
-			if (currentWorldData != null)
-			{
-				worldData.autoBind(currentWorldData);
-			}
 		}
 
 		return worldData;
@@ -94,7 +83,12 @@ public class NetherManager
 		return persistence.get(worldData, NetherWorld.class);
 	}
 	
-	public NetherWorld getDefaultNether(World currentWorld)
+	protected NetherWorld getWorldData(String worldName)
+	{
+		return persistence.get(worldName, NetherWorld.class);
+	}
+	
+	public NetherWorld getDefaultNether()
 	{
 		NetherWorld nether = persistence.get("nether", NetherWorld.class);
 		if (nether != null)
@@ -102,7 +96,7 @@ public class NetherManager
 			return nether;
 		}
 				
-		nether = createWorld("nether", Environment.NETHER, currentWorld);
+		nether = createWorld("nether", Environment.NETHER);
 		persistence.put(nether);
 	
 		return nether;	
@@ -123,11 +117,10 @@ public class NetherManager
 			// TODO - Persistence: a way to get entity could without getting a whole list!
 			if (allWorlds.size() == 1)
 			{
-				targetWorld = getDefaultNether(currentWorld);
+				targetWorld = getDefaultNether();
 				if (targetWorld != null)
 				{
-					thisWorldData.setTargetWorld(targetWorld);
-					thisWorldData.autoBind(thisWorldData);
+					thisWorldData.bind(thisWorldData);
 				}
 			}
 		}

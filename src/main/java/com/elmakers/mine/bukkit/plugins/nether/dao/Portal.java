@@ -61,7 +61,8 @@ public class Portal extends Persisted
 			needsPlatform.add(Material.LAVA);
 			needsPlatform.add(Material.STATIONARY_LAVA);
 		
-			destructible = CSVParser.parseMaterials(DEFAULT_DESTRUCTIBLES);
+			CSVParser csv = new CSVParser();
+			destructible = csv.parseMaterials(DEFAULT_DESTRUCTIBLES);
 		}
 	}
 	

@@ -9,35 +9,35 @@ import com.elmakers.mine.bukkit.plugins.nether.dao.NetherPlayer;
 
 public class NetherEntityListener extends EntityListener
 {
-	@Override
-	public void onEntityDamage(EntityDamageEvent event)
-	{
-		if (event.getEntity() instanceof Player)
-		{
-			Player player = (Player)event.getEntity();
-			NetherPlayer playerData = manager.getPlayerData(player);
-			if (playerData != null && playerData.areShieldsUp())
-			{
-				event.setCancelled(true);
-			}
-		}
-	}
+    protected NetherManager manager;
 
-	public NetherEntityListener(NetherManager manager)
-	{
-		this.manager = manager;
-	}
+    public NetherEntityListener(NetherManager manager)
+    {
+        this.manager = manager;
+    }
 
-	@Override
-	public void onEntityDeath(EntityDeathEvent event)
-	{
-		if (Player.class.isInstance(event.getEntity()))
-		{
-			Player player = (Player)event.getEntity();
-			manager.onPlayerDeath(player, event);
-		}
-	}
-	
-	protected NetherManager manager;
+    @Override
+    public void onEntityDamage(EntityDamageEvent event)
+    {
+        if (event.getEntity() instanceof Player)
+        {
+            Player player = (Player) event.getEntity();
+            NetherPlayer playerData = manager.getPlayerData(player);
+            if (playerData != null && playerData.areShieldsUp())
+            {
+                event.setCancelled(true);
+            }
+        }
+    }
+
+    @Override
+    public void onEntityDeath(EntityDeathEvent event)
+    {
+        if (Player.class.isInstance(event.getEntity()))
+        {
+            Player player = (Player) event.getEntity();
+            manager.onPlayerDeath(player, event);
+        }
+    }
 
 }

@@ -44,92 +44,70 @@ public class NetherGatePlugin extends JavaPlugin
     }
 
     protected PluginCommand        areaCommand;
-
     protected PluginCommand        areaCreateCommand;
-
-    protected Message              centeredWorldMessage;
-
-    protected Message              cleanSpawnFailedMessage;
-
-    protected Message              cleanSpawnMessage;
-
     protected PluginCommand        compassCommand;
-
-    protected Message              compassMessage;
-
-    protected Message              creationFailedMessage;
-
-    protected Message              creationSuccessMessage;
-
-    protected Message              deletedWorldMessage;
-
-    protected Message              disableScaleMessage;
-
-    protected NetherEntityListener entityListener  = new NetherEntityListener(manager);
-
-    protected Message              giveKitMessage;
-
-    protected Message              goFailedMessage;
-
-    protected Message              goHomeFailedMessage;
-
-    protected Message              goHomeSuccessMessage;
-
-    protected Message              goSuccessMessage;
-
     protected PluginCommand        homeCommand;
-
     protected PluginCommand        homeGoCommand;
-
     protected PluginCommand        homeSetCommand;
-
-    protected Message              homeSetFailedMessage;
-
-    protected Message              homeSetMessage;
-    protected Message              invalidNumberMessage;
-
     protected PluginCommand        kitCommand;
-    protected Message              listWorldMessage;
-    protected NetherManager        manager         = new NetherManager();
     protected PluginCommand        netherCommand;
-    protected Message              netherExistsMessage;
-    protected Message              noHomeMessage;
-    protected Message              noWorldMessage;
-    protected Persistence          persistence     = null;
-    protected NetherBlockListener  physicsListener = new NetherBlockListener(manager);
-
-    protected Message              playerCommandMessage;
-    protected NetherPlayerListener playerListener  = new NetherPlayerListener(manager);
-    protected Message              requiresWorldMessage;
-    protected Message              retargtedWorldMessage;
-
-    protected Message              scaledWorldMessage;
     protected PluginCommand        spawnCleanCommand;
     protected PluginCommand        spawnCommand;
-
     protected PluginCommand        spawnGoCommand;
-    protected Message              spawnGoFailedMessage;
-
-    protected Message              spawnGoMessage;
     protected PluginCommand        spawnSetCommand;
-    protected Message              spawnSetFailedMessage;
-    protected Message              spawnSetMessage;
-    protected PluginUtilities      utilities       = null;
     protected PluginCommand        worldCenterCommand;
     protected PluginCommand        worldCommand;
     protected PluginCommand        worldCreateCommand;
-    protected Message              worldCreateFailedMessage;
-    protected Message              worldCreateMessage;
     protected PluginCommand        worldDeleteCommand;
-    protected Message              worldExistsMessage;
     protected PluginCommand        worldGoCommand;
     protected PluginCommand        worldListCommand;
-    protected NetherWorldListener  worldListener   = new NetherWorldListener(manager);
     protected PluginCommand        worldLoadCommand;
-    protected Message              worldLoadFailedMessage;
-    protected Message              worldLoadMessage;
     protected PluginCommand        worldScaleCommand;
     protected PluginCommand        worldTargetCommand;
+    
+    protected Message              centeredWorldMessage;
+    protected Message              cleanSpawnFailedMessage;
+    protected Message              cleanSpawnMessage;
+    protected Message              compassMessage;
+    protected Message              creationFailedMessage;
+    protected Message              creationSuccessMessage;
+    protected Message              deletedWorldMessage;
+    protected Message              disableScaleMessage;
+    protected Message              giveKitMessage;
+    protected Message              goFailedMessage;
+    protected Message              goHomeFailedMessage;
+    protected Message              goHomeSuccessMessage;
+    protected Message              goSuccessMessage;
+    protected Message              homeSetFailedMessage;
+    protected Message              homeSetMessage;
+    protected Message              invalidNumberMessage;
+    protected Message              listWorldMessage;
+    protected Message              netherExistsMessage;
+    protected Message              noHomeMessage;
+    protected Message              noWorldMessage;
+    protected Message              playerCommandMessage;
+    protected Message              requiresWorldMessage;
+    protected Message              retargtedWorldMessage;
+    protected Message              scaledWorldMessage;
+    protected Message              spawnGoFailedMessage;
+    protected Message              spawnGoMessage;
+    protected Message              spawnSetFailedMessage;
+    protected Message              spawnSetMessage;
+    protected Message              worldCreateFailedMessage;
+    protected Message              worldCreateMessage;
+    protected Message              worldExistsMessage;
+    protected Message              worldLoadFailedMessage;
+    protected Message              worldLoadMessage;
+    
+    protected Persistence          persistence     = null;
+    protected PluginUtilities      utilities       = null;
+    
+    protected NetherManager        manager         = new NetherManager();
+    protected NetherEntityListener entityListener  = new NetherEntityListener(manager);
+    protected NetherBlockListener  physicsListener = new NetherBlockListener(manager);
+    protected NetherPlayerListener playerListener  = new NetherPlayerListener(manager);
+    protected NetherWorldListener  worldListener   = new NetherWorldListener(manager);
+ 
 
     public NetherManager getManager()
     {
@@ -526,9 +504,9 @@ public class NetherGatePlugin extends JavaPlugin
 
         pm.registerEvent(Type.PLAYER_MOVE, playerListener, Priority.Normal, this);
         pm.registerEvent(Type.PLAYER_LOGIN, playerListener, Priority.Monitor, this);
-        pm.registerEvent(Type.CHUNK_LOADED, worldListener, Priority.Normal, this);
+        pm.registerEvent(Type.CHUNK_LOAD, worldListener, Priority.Normal, this);
         pm.registerEvent(Type.BLOCK_PHYSICS, physicsListener, Priority.Normal, this);
-        pm.registerEvent(Type.ENTITY_DAMAGED, entityListener, Priority.Normal, this);
+        pm.registerEvent(Type.ENTITY_DAMAGE, entityListener, Priority.Normal, this);
     }
 
     public boolean onGo(CommandSender sender, String[] parameters)

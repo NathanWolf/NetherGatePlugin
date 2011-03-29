@@ -357,7 +357,7 @@ public class NetherManager
 
             // Go up one block so the player is inside the portal
             targetLocation.setY(targetLocation.getY() + 1);
-            player.teleportTo(targetLocation);
+            player.teleport(targetLocation);
 
             playerData.update(player);
         }

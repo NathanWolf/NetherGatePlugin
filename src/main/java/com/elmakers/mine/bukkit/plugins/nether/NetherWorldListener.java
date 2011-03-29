@@ -13,7 +13,7 @@ public class NetherWorldListener extends WorldListener
     }
 
     @Override
-    public void onChunkLoaded(ChunkLoadEvent event)
+    public void onChunkLoad(ChunkLoadEvent event)
     {
         manager.onChunkLoaded(event.getChunk());
     }

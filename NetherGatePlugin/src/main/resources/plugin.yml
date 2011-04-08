@@ -4,6 +4,8 @@ version: 0.55
 website: http://mine.elmakers.com
 author: NathanWolf
 description : An attempt to reproduce Nether Gates in SMP
+depend:
+ - Persistence
 commands:
   nether:
     description: Administer Nether areas

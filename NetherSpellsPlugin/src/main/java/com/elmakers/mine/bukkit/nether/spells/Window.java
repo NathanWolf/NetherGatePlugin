@@ -13,7 +13,7 @@ import com.elmakers.mine.bukkit.persistence.dao.ParameterMap;
 import com.elmakers.mine.bukkit.plugins.nether.NetherManager;
 import com.elmakers.mine.bukkit.utilities.BlockRequestListener;
 
-public class WindowSpell extends Spell implements BlockRequestListener
+public class Window extends Spell implements BlockRequestListener
 {
     private int           defaultRadius         = 3;
     private int           defaultSearchDistance = 32;
@@ -24,7 +24,7 @@ public class WindowSpell extends Spell implements BlockRequestListener
     private int           radius                = defaultRadius;
     private Block         targetBlock           = null;
 
-    public WindowSpell(NetherManager nether)
+    public Window(NetherManager nether)
     {
         this.nether = nether;
     }

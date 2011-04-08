@@ -4,11 +4,11 @@ import com.elmakers.mine.bukkit.magic.Spell;
 import com.elmakers.mine.bukkit.persistence.dao.ParameterMap;
 import com.elmakers.mine.bukkit.plugins.nether.NetherManager;
 
-public class PhaseSpell extends Spell
+public class Phase extends Spell
 {
     private final NetherManager nether;
 
-    public PhaseSpell(NetherManager nether)
+    public Phase(NetherManager nether)
     {
         this.nether = nether;
     }

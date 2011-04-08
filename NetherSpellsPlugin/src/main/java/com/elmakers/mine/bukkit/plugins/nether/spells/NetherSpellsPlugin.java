@@ -9,9 +9,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import com.elmakers.mine.bukkit.magic.Spell;
-import com.elmakers.mine.bukkit.nether.spells.PhaseSpell;
-import com.elmakers.mine.bukkit.nether.spells.PortalSpell;
-import com.elmakers.mine.bukkit.nether.spells.WindowSpell;
+import com.elmakers.mine.bukkit.nether.spells.Phase;
+import com.elmakers.mine.bukkit.nether.spells.Portal;
+import com.elmakers.mine.bukkit.nether.spells.Window;
 import com.elmakers.mine.bukkit.plugins.nether.NetherGatePlugin;
 import com.elmakers.mine.bukkit.plugins.nether.NetherManager;
 
@@ -23,9 +23,9 @@ public class NetherSpellsPlugin extends JavaPlugin
         
         List<Spell> spells = new ArrayList<Spell>();
 
-        spells.add(new PhaseSpell(nether));
-        spells.add(new PortalSpell(nether));
-        spells.add(new WindowSpell(nether));
+        spells.add(new Phase(nether));
+        spells.add(new Portal(nether));
+        spells.add(new Window(nether));
         
         return spells;
     }

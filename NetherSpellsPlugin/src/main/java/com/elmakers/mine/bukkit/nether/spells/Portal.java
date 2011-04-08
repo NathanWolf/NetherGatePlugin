@@ -12,13 +12,13 @@ import com.elmakers.mine.bukkit.persistence.dao.BoundingBox;
 import com.elmakers.mine.bukkit.persistence.dao.ParameterMap;
 import com.elmakers.mine.bukkit.plugins.nether.NetherManager;
 
-public class PortalSpell extends Spell
+public class Portal extends Spell
 {
     private final int       defaultSearchDistance = 32;
 
     protected NetherManager nether;
 
-    public PortalSpell(NetherManager nether)
+    public Portal(NetherManager nether)
     {
         this.nether = nether;
     }
